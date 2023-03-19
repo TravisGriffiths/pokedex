@@ -11,11 +11,22 @@ load and run this:
 3. `npm install` to get the required packages
 4. `npm run dev` will run the dev server if desired. 
 5. `npm run test` will run the linter and all jest tests
-6. `npm run build` will first run all testing, then build the project for production
+6. `npm run build` will lint and compile all files, placing the results in the `dist` folder
+7. `npm run preview` runs a local server on the compiled files in `dist`
 
 
 In addition to Vite, this project uses Redux Toolkit in order to satisfy the "latest Redux framework". 
 The react version is 18.2 for the same reason.
+
+## Usage
+
+When starting up the app will make an immediate fetch to the Pokemon API GraphQL endpoint to get the *full* list of all Pokemon
+by `name` and `id` *only*. This is a list of 1008 pokemon and loads quite quickly. At this point an input box appears on the left asking you to enter the name of a pokemon. The full list will filter by whatever string you enter giving you a list of the
+results. Each of these items is *clickable* and will trigger a query to load the full pokemon from the API. The information displayed is quite basic, but does include the *Color* of the pokemon, which will style the underline of the name.
+
+Every time a query goes to the API, the retrieved pokemon is placed in a cache. If the user wants to return to view that pokemon it will render from the cache *not* from the API. That is every endpoint of the API will only be queried *once*. This is possible as the values are fairly set and unlikely to change so repeat queries are wasteful. 
+
+Every query goes in a list of viewed pokemon. There are 'Previous' and 'Next' buttons that allow a user to peruse back and forth along this list. All of these pokemon are served out of the cache so the response should be very quick. Choosing the same pokemon multiple times consecutively from the master list is treated like a no-op, the user is already viewing that pokemon. However, if a user decides to load the same pokemon many times non-consecutively, the history queue will load those happily. These will come from cache after the first load, so will be served rapidly. This only add a single integer to the queue every time to the queue and the cache itself has no repeats, so if a user decides to do this, the resource cost is extremely minimal. 
 
 
 TODO:
@@ -23,10 +34,11 @@ TODO:
 2. Not all jest tests are written. 
 3. I didn't find any collected open source images of all the Pokemon, but having these woudl *greatly* enhance the UX
 4. I didn't take the time to grab and use svg icons. This would improve the UI
+5. Use a more modern package manager than npm, in this case it was a deliberate choice as the presese of npm on a testing machine is almost ubiqutous. 
 
 
 To deploy into a concurrent environment:
-1. File/Folder organization would have to be standardized. This folder setup works as it is a very small app. 
-2. Error catching needs to be wired into appropriate logging API so problems can be detected. 
+1. File/Folder organization would have to be standardized. This folder setup works as it is a very small app.
+2. Error catching needs to be wired into appropriate logging API so problems can be detected centrally. 
 3. An error boundry around this feature might be appropriate. 
 4. Some End to End tests should be implemented.
