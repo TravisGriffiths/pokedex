@@ -106,10 +106,10 @@ const HistoryNavigator: React.FC = () => {
 
    return (
       <NavigatorContainer>
-         <NavigationButton disabled={!previousActive} onClick={() => dispatch(previousPokemon())}>
+         <NavigationButton aria-label="prev-button" disabled={!previousActive} onClick={() => dispatch(previousPokemon())}>
             View Previous
          </NavigationButton>
-         <NavigationButton disabled={!nextActive} onClick={() => dispatch(nextPokemon())}>
+         <NavigationButton aria-label="next-button" disabled={!nextActive} onClick={() => dispatch(nextPokemon())}>
             View Next
          </NavigationButton>
       </NavigatorContainer>

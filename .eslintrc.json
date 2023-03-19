@@ -49,7 +49,6 @@
         "no-use-before-define": "error",
         "no-var": "error",
         "require-atomic-updates": "error",
-        "semi": "error",
         "sort-vars": "warn",
         "wrap-regex":"error"
     }

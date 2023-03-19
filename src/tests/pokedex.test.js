@@ -2,11 +2,9 @@
 // of "jest", "describe" and "it" already in scope, so the no-undef check is silenced
 /* eslint-disable no-undef */
 
-import renderer from 'react-test-renderer';
 import PokeDex from '../components/pokedex';
 import React from 'react';
 import * as reactRedux from 'react-redux';
-import { allPokemon } from '../state/slices';
 import { fireEvent, render, screen } from '@testing-library/react'
 
 jest.mock("react-redux", () => ({
@@ -41,7 +39,6 @@ const emptyMockStore = {
    pokemonView: {
       status: 'idle',
       pokemon: null,
-      id: 0, 
       index: -1,
       history: []
    }
@@ -66,6 +63,7 @@ const loadedMockStore = {
 describe('Pokedex component', () => {
 
    beforeEach(() => {
+       //eslint-disable-next-line @typescript-eslint/no-empty-function
       useDispatchMock.mockImplementation(() => () => {});
   });
 

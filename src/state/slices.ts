@@ -111,7 +111,6 @@ export const fetchPokemon = createAsyncThunk('pokemonView/fetchPokemon', async (
 interface PokemonViewSliceState {
    status: FetchStatus;
    pokemon: Pokemon | null;
-   id: number;
    index: number;
    history: number[];
 }
@@ -119,7 +118,6 @@ interface PokemonViewSliceState {
 const initialViewingState: PokemonViewSliceState = {
    status: 'idle',
    pokemon: null,
-   id: 0, 
    index: -1,
    history: []
 };
