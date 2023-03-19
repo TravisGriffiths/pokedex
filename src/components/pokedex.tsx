@@ -78,7 +78,7 @@ const StatusResolver: Record<FetchStatus, ReactNode> = {
 
 const PokeDex: React.FC = () => {
    const status = useSelector(fetchStatus);
-
+   console.log(`Status is: ${status}`);
    return (
       <SearchContainer>
          { StatusResolver[status] }
