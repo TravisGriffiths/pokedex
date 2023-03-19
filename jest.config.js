@@ -2,6 +2,8 @@ export default {
    moduleDirectories: [
       "node_modules"
    ],
-   transform: {},
+   transform: {
+      "^.+\\.jsx?$": "./wrapper.js"
+   },
    verbose: true,
 };

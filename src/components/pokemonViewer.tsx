@@ -53,6 +53,10 @@ const NavigationButton = styled.button`
    }
 `;
 
+const ViewerMessage = styled.h2`
+   margin-top: 8px;
+`;
+
 interface StringValueProps {
    value: string;
 }
@@ -118,7 +122,7 @@ const PokemonViewer: React.FC= () => {
    if (String(status) === 'loading') {
       return (
          <PokeViewerContainer>
-            <h2>One moment while we retrive your pokemon</h2>
+            <ViewerMessage>One moment while we retrive your pokemon</ViewerMessage>
          </PokeViewerContainer>
       );
    }
@@ -128,14 +132,14 @@ const PokemonViewer: React.FC= () => {
       <PokemonName color={pokemon.color}>{pokemon.name}</PokemonName>
       <Attribute name="Base Happines" value={pokemon.baseHappiness} />
       <Attribute name="Capture Rate" value={pokemon.captureRate} />
-      <Attribute name="Baby?" value={pokemon.isBaby} />
-      <Attribute name="Legendary?" value={pokemon.isLegendary} />
-      <Attribute name="Mythical?" value={pokemon.isMythical} />
+      <Attribute name="Baby" value={pokemon.isBaby} />
+      <Attribute name="Legendary" value={pokemon.isLegendary} />
+      <Attribute name="Mythical" value={pokemon.isMythical} />
       <HistoryNavigator />
    </PokeViewerContainer >
    ) : ( 
       <PokeViewerContainer>
-         <h2>Please select a Pokemon</h2>
+         <ViewerMessage>Please select a Pokemon</ViewerMessage>
       </PokeViewerContainer>
    );
 };

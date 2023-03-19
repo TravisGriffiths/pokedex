@@ -1,13 +1,11 @@
+import { FetchStatus, PokeStub } from "../state/types";
 import React, { useState, ReactNode, ChangeEvent } from "react";
-
-import styled from "styled-components";
 import { allPokemon, fetchStatus } from "../state/slices";
 
 import { fetchPokemonById } from '../state/actions';
-import { useSelector } from "react-redux";
-import { FetchStatus, PokeStub } from "../state/types";
 import { filterPokemonByName } from "../utils";
-
+import styled from "styled-components";
+import { useSelector } from "react-redux";
 
 const SearchContainer = styled.div`
    flex: 1;
@@ -18,7 +16,7 @@ const PokeSearch = styled.input`
    font-size: 24px;
    color: #333;
    border-radius: 3px;
-
+   margin-top: 10px;
 `;
 
 const PokemonNameList = styled.ul`
@@ -79,7 +77,6 @@ const StatusResolver: Record<FetchStatus, ReactNode> = {
 };
 
 const PokeDex: React.FC = () => {
- 
    const status = useSelector(fetchStatus);
 
    return (
