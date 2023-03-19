@@ -1,16 +1,18 @@
-import { AttributeType, Pokemon  } from "../state/types";
-import React from "react";
-import styled from "styled-components";
-
-import { palette } from "../state/constants";
-import { store } from "../state/store";
+import { 
+   hasNext, 
+   hasPrevious, 
+   viewingPokemon,
+   viewingStatus } from "../state/slices";
+import {  previousPokemon, nextPokemon } from '../state/actions';
 import { useDispatch, useSelector } from "react-redux";
-import { hasNext, hasPrevious, viewingPokemon, viewingStatus, previousPokemon, nextPokemon } from "../state/slices";
 
+import { AttributeType, Color } from "../state/types";
+import React from "react";
+import { palette } from "../state/constants";
+import styled from "styled-components";
 
 const PokeViewerContainer = styled.div`
    flex: 4;
-   border: 1px black solid;
 `;
 
 
@@ -25,11 +27,13 @@ const AttributeEntry = styled.div`
    margin-left: 2rem;
 `;
 
-const PokemonName = styled.div`
+const PokemonName = styled.div<{color: string}>`
    font-size: 32px;
    font-weight: bold;
    margin-left: 3rem;
-   text-decoration: underline ${palette.red};
+   ${
+      ({color}) => `text-decoration: underline ${palette[color as Color]};` 
+   }
    &:first-letter {
       text-transform: uppercase;
    }
@@ -109,32 +113,31 @@ const HistoryNavigator: React.FC = () => {
 };
 
 const PokemonViewer: React.FC= () => {
-
+   const status = useSelector(viewingStatus);
    const pokemon = useSelector(viewingPokemon);
-   const fetchStatus = useSelector(viewingStatus);
+   if (String(status) === 'loading') {
+      return (
+         <PokeViewerContainer>
+            <h2>One moment while we retrive your pokemon</h2>
+         </PokeViewerContainer>
+      );
+   }
 
-
-   
    return pokemon ? (
       <PokeViewerContainer >
-      <PokemonName>{pokemon.name}</PokemonName>
+      <PokemonName color={pokemon.color}>{pokemon.name}</PokemonName>
       <Attribute name="Base Happines" value={pokemon.baseHappiness} />
       <Attribute name="Capture Rate" value={pokemon.captureRate} />
       <Attribute name="Baby?" value={pokemon.isBaby} />
       <Attribute name="Legendary?" value={pokemon.isLegendary} />
       <Attribute name="Mythical?" value={pokemon.isMythical} />
       <HistoryNavigator />
-
    </PokeViewerContainer >
-   ) : (
+   ) : ( 
       <PokeViewerContainer>
          <h2>Please select a Pokemon</h2>
-      </PokeViewerContainer> 
-     
+      </PokeViewerContainer>
    );
 };
-
-
-
 
 export default PokemonViewer;

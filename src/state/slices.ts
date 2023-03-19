@@ -6,6 +6,7 @@ import { POKEMON_LOOKUP_URL , POKE_GRAPHQL_ENDPOINT } from "./constants";
 import { Pokemon, PokeStub, FetchStatus } from './types';
 import { RootState } from "./store";
 import axios from 'axios';
+
 import cache from "./cache";
 import { isError } from "../utils";
 
@@ -92,7 +93,8 @@ export const fetchPokemon = createAsyncThunk('pokemonView/fetchPokemon', async (
          captureRate: capture_rate, 
          isBaby: is_baby, 
          isLegendary: is_legendary,
-         isMythical: is_mythical
+         isMythical: is_mythical,
+         color: response.data.color.name
       };
       cache.set(id, viewedPokemon);
       return viewedPokemon;
@@ -171,16 +173,4 @@ export const viewingPokemon = (state: RootState) => state.pokemonViewer.pokemon;
 export const viewingStatus = (state: RootState) => state.pokemonViewer.status;
 export const hasPrevious = (state: RootState) => state.pokemonViewer.index > 0;
 export const hasNext = (state: RootState) => state.pokemonViewer.index < state.pokemonViewer.history.length - 1;
-
-// Actions
-
-export const previousPokemon = pokemonViewerSlice.actions.back;
-export const nextPokemon = pokemonViewerSlice.actions.forward;
-
-
-
-
-
-
-
 

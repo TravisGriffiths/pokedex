@@ -1,15 +1,16 @@
 import React, { useState, ReactNode, ChangeEvent } from "react";
 
 import styled from "styled-components";
-import {allPokemon,  fetchStatus, fetchPokemon } from "../state/slices";
+import { allPokemon, fetchStatus } from "../state/slices";
+
+import { fetchPokemonById } from '../state/actions';
 import { useSelector } from "react-redux";
 import { FetchStatus, PokeStub } from "../state/types";
 import { filterPokemonByName } from "../utils";
-import { store } from "../state/store";
+
 
 const SearchContainer = styled.div`
    flex: 1;
-   border: 1px solid green;
 `;
 
 const PokeSearch = styled.input`
@@ -23,8 +24,13 @@ const PokeSearch = styled.input`
 const PokemonNameList = styled.ul`
    list-style: none;
    overflow-y: scroll;
-   max-height: 600px;
+   max-height: 800px;
    text-align: left;
+   &::-webkit-scrollbar {
+      display: none;
+   }
+   -ms-overflow-style: none;  
+   scrollbar-width: none;  
 `;
 
 const PokemonListItem = styled.li`
@@ -33,6 +39,10 @@ const PokemonListItem = styled.li`
    &:hover {
       background-color: #888;
    }
+   &:first-letter {
+      text-transform: uppercase;
+   }
+   border
 `;
 
 const FetchFailureNotification: React.FC = () => 
@@ -50,10 +60,10 @@ const SearchPokedex: React.FC = () => {
 
    return (
       <>
-         <PokeSearch type="text" onChange={filterOnName} placeholder="Enter Pokemon Name"/>
+         <PokeSearch type="text" onChange={filterOnName} placeholder="Enter any pokemon name"/>
          <PokemonNameList>
             { pokeList.map((pm: PokeStub) => 
-               <PokemonListItem key={pm.id} onClick={() => store.dispatch(fetchPokemon(pm.id))}>
+               <PokemonListItem key={pm.id} onClick={() => fetchPokemonById(pm.id)}>
                   {pm.name}
                </PokemonListItem>)}
          </PokemonNameList>
