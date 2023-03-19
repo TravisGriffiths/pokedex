@@ -6,7 +6,6 @@ import { POKEMON_LOOKUP_URL , POKE_GRAPHQL_ENDPOINT } from "./constants";
 import { Pokemon, PokeStub, FetchStatus } from './types';
 import { RootState } from "./store";
 import axios from 'axios';
-
 import cache from "./cache";
 import { isError } from "../utils";
 
