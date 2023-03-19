@@ -58,7 +58,7 @@ const SearchPokedex: React.FC = () => {
 
    return (
       <>
-         <PokeSearch type="text" onChange={filterOnName} placeholder="Enter any pokemon name"/>
+         <PokeSearch type="text" aria-label="search-input" onChange={filterOnName} placeholder="Enter any pokemon name"/>
          <PokemonNameList>
             { pokeList.map((pm: PokeStub) => 
                <PokemonListItem key={pm.id} onClick={() => fetchPokemonById(pm.id)}>

@@ -7,7 +7,7 @@ import PokeDex from '../components/pokedex';
 import React from 'react';
 import * as reactRedux from 'react-redux';
 import { allPokemon } from '../state/slices';
-import { render, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 
 jest.mock("react-redux", () => ({
     useSelector: jest.fn(),
@@ -67,19 +67,30 @@ describe('Pokedex component', () => {
 
    beforeEach(() => {
       useDispatchMock.mockImplementation(() => () => {});
-      
   });
 
-  it('Should render notification message as the master list is loaded', () => {
-      useSelectorMock.mockImplementation(selector => selector(emptyMockStore));
+   it('Should render notification message as the master list is loaded', () => {
+         useSelectorMock.mockImplementation(selector => selector(emptyMockStore));
+         render(<PokeDex />);
+         screen.getByText("Retrivieng Pokedex....");
+   });
+
+   it('Should wait for imput ', () => {
+      useSelectorMock.mockImplementation(selector => selector(loadedMockStore));
+      const {container} = render(<PokeDex />);
+      const input = container.querySelector('input');
+      expect(input.attributes.placeholder.value).toEqual("Enter any pokemon name");
+   });
+
+   it('Should filter results', () => {
+      useSelectorMock.mockImplementation(selector => selector(loadedMockStore));
       render(<PokeDex />);
-      screen.getByText("Retrivieng Pokedex....");
-  });
-
-  it('Should wait for imput ', () => {
-   useSelectorMock.mockImplementation(selector => selector(loadedMockStore));
-   console.dir(loadedMockStore);
-   render(<PokeDex />);
-   screen.getByText("Enter any pokemon name");
-});
+      const inputEl = screen.getByLabelText("search-input");
+      fireEvent.change(inputEl, {target: {value: 'd'}});
+      // With a 'd' we should have both 'second' and 'first'
+      screen.getByText('second');
+      screen.getByText('third');
+      // 'first' should be absent
+      expect(screen.queryByText('first')).toBeNull();
+   });
 });
