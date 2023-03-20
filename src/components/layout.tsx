@@ -1,7 +1,8 @@
+import HistoryViewer from "./historyViewer";
 import React from "react";
-import styled from "styled-components";
 import PokeDex from "./pokedex";
 import PokemonViewer from "./pokemonViewer";
+import styled from "styled-components";
 
 const PokeSearchContainer = styled.div`
    display: flex;
@@ -13,6 +14,7 @@ const PokeSearchLayout: React.FC = () => (
    <PokeSearchContainer>
       <PokeDex />
       <PokemonViewer />
+      <HistoryViewer />
    </PokeSearchContainer>
 );
 

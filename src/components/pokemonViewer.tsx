@@ -15,7 +15,6 @@ const PokeViewerContainer = styled.div`
    flex: 4;
 `;
 
-
 const AttributeName = styled.span`
    font-weight: bold;
    margin-right: 1rem;

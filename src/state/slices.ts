@@ -138,6 +138,13 @@ export const pokemonViewerSlice = createSlice({
          state.index = newIndex;
          state.pokemon = cache.get(state.history[newIndex]);
       },
+      setIndex: (state, action) => {
+         if (action.payload < state.history.length) {
+            const newIndex = action.payload;
+            state.index = newIndex
+            state.pokemon = cache.get(state.history[newIndex]);
+         }
+      }
    },
    extraReducers(builder) {
       builder.addCase(fetchPokemon.pending, (state) => {
@@ -170,4 +177,6 @@ export const viewingPokemon = (state: RootState) => state.pokemonViewer.pokemon;
 export const viewingStatus = (state: RootState) => state.pokemonViewer.status;
 export const hasPrevious = (state: RootState) => state.pokemonViewer.index > 0;
 export const hasNext = (state: RootState) => state.pokemonViewer.index < state.pokemonViewer.history.length - 1;
+export const fullHistory = (state: RootState) => state.pokemonViewer.history;
+export const currentPokeIndex = (state: RootState) => state.pokemonViewer.index;
 

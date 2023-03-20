@@ -9,6 +9,7 @@ export const fetchPokemonById = (id: number) => store.dispatch(fetchPokemon(id))
 export const fetchAllPokeStubs = () => store.dispatch(fetchAllPokemon());
 export const previousPokemon = pokemonViewerSlice.actions.back;
 export const nextPokemon = pokemonViewerSlice.actions.forward;
+export const setCurrentIndex = (index: number) => pokemonViewerSlice.actions.setIndex(index);
 
 
 

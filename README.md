@@ -28,6 +28,10 @@ Every time a query goes to the API, the retrieved pokemon is placed in a cache. 
 
 Every query goes in a list of viewed pokemon. There are 'Previous' and 'Next' buttons that allow a user to peruse back and forth along this list. All of these pokemon are served out of the cache so the response should be very quick. Choosing the same pokemon multiple times consecutively from the master list is treated like a no-op, the user is already viewing that pokemon. However, if a user decides to load the same pokemon many times non-consecutively, the history queue will load those happily. These will come from cache after the first load, so will be served rapidly. This only add a single integer to the queue every time to the queue and the cache itself has no repeats, so if a user decides to do this, the resource cost is extremely minimal. 
 
+## Business Requirements
+- [x] Use the Pokemon API to make API requests for data https://pokeapi.co/docs/v2. _Both REST and GraphQL endpoints are used_.
+- [x] Able to search for any Pokemon. _Full list of all pokemon is loaded immediately, all subsequent calls fetch specifcs_
+- [x] Able to see a history of what has been searched and revisit at anytime.
 
 TODO:
 1. Some of the original vite scaffolding, css in particular is left, but has not been removed if it is not affecting the look of the app. 
