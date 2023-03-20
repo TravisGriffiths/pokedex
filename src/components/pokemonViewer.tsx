@@ -40,7 +40,6 @@ const PokemonName = styled.div<{color: string}>`
 
 const NavigatorContainer = styled.div`
    diplay: flex;
-   margin: 2em;
 `;
 
 const NavigationButton = styled.button`
