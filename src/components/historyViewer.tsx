@@ -44,6 +44,7 @@ const HistoryViewer: React.FC = () => {
       { history.map((id: number, idx) => {
          const p: Pokemon = cache.get(id);
          return (<ViewedPokemon 
+            aria-label="viewed-pokemon"
             key={idx} 
             index={idx} 
             current={currentIdx} 

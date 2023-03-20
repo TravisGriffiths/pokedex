@@ -6,6 +6,7 @@ import PokemonViewer from '../components/pokemonViewer';
 import React from 'react';
 import * as reactRedux from 'react-redux';
 import { render, screen } from '@testing-library/react'
+import { emptyMockStore, loadingMockStore, loadedMockStore, hasPastMockStore, hasFullHistoryMockStore } from './mocks';
 
 jest.mock("react-redux", () => ({
     useSelector: jest.fn(),
@@ -14,90 +15,6 @@ jest.mock("react-redux", () => ({
 
 const useSelectorMock = reactRedux.useSelector;
 const useDispatchMock = reactRedux.useDispatch;
-
-
-const mockPokemon = {
-   id: 1,
-   name: 'first',
-   isBaby: false,
-   isLegendary: false,
-   isMythical: true,
-   baseHappiness: 12,
-   captureRate: 34,
-   color: 'yellow'
-}
-
-const emptyMockStore = {
-   pokedex: {
-      status: 'idle',
-      pokedex: [],
-      error: null
-   }, 
-   pokemonViewer: {
-      status: 'idle',
-      pokemon: null,
-      index: -1,
-      history: []
-   }
-};
-
-const loadingMockStore = {
-   pokedex: {
-      status: 'succeeded',
-      pokedex: [],
-      error: null
-   }, 
-   pokemonViewer: {
-      status: 'loading',
-      pokemon: mockPokemon,
-      index: 0,
-      history: [1]
-   }
-};
-
-
-const loadedMockStore = {
-   pokedex: {
-      status: 'succeeded',
-      pokedex: [],
-      error: null
-   }, 
-   pokemonViewer: {
-      status: 'suceeded',
-      pokemon: mockPokemon,
-      index: 0,
-      history: [1]
-   }
-};
-
-const hasPastMockStore = {
-   pokedex: {
-      status: 'succeeded',
-      pokedex: [],
-      error: null
-   }, 
-   pokemonViewer: {
-      status: 'suceeded',
-      pokemon: mockPokemon,
-      index: 1,
-      history: [2, 1]
-   }
-}
-
-const hasFullHistoryMockStore = {
-   pokedex: {
-      status: 'succeeded',
-      pokedex: [],
-      error: null
-   }, 
-   pokemonViewer: {
-      status: 'suceeded',
-      pokemon: mockPokemon,
-      index: 1,
-      history: [3, 2, 1]
-   }
-}
-
 
 describe('Pokemon viewer component', () => {
 
