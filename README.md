@@ -44,8 +44,8 @@ Last, on the right there is the history view, which lists all of the pokemon in 
 - [x] Has a README. _This Document_
 
 ## Bonus Points
-- [] Able to see details about abilities, moves, species, sprites, and types upon searching. _Spent a large amount of time wrestling Jest configuration to the ground, while it is tempting and easy at this stage, have not implemented this. 
-- [] Able to see other evolutions of Pokemon and be able to navigate to specific Pokemon in the evolution chain. _Same as above_
+- [ ] Able to see details about abilities, moves, species, sprites, and types upon searching. _Spent a large amount of time wrestling Jest configuration to the ground, while it is tempting and easy at this stage, have not implemented this. 
+- [ ] Able to see other evolutions of Pokemon and be able to navigate to specific Pokemon in the evolution chain. _Same as above_
 - [x] Sleak and intuitive style that resembles a Pokedex. _Confession: I have *no* idea what a Pokedex looks like, but I think the functionality implemented is quite intuitive. 
 - [x] Automated test to ensure the business logic is correct. _These are included, but could have more_
 
