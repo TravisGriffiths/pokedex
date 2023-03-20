@@ -10,7 +10,7 @@ load and run this:
 2. `cd` into the new directory
 3. `npm install` to get the required packages
 4. `npm run dev` will run the dev server if desired. 
-5. `npm run test` will run the linter and all jest tests
+5. `npm run test` will run the linter and all jest tests. Jest may not run tests if it does not detect any file delta since the last run, and give a menu. (A)ll will re-run the tests. (Q)uit or simply Ctl + C will exit. 
 6. `npm run build` will lint and compile all files, placing the results in the `dist` folder
 7. `npm run preview` runs a local server on the compiled files in `dist`
 
@@ -28,7 +28,7 @@ Every time a query goes to the API, the retrieved pokemon is placed in a cache. 
 
 Every query goes in a list of viewed pokemon. There are 'Previous' and 'Next' buttons that allow a user to peruse back and forth along this list. All of these pokemon are served out of the cache so the response should be very quick. Choosing the same pokemon multiple times consecutively from the master list is treated like a no-op, the user is already viewing that pokemon. However, if a user decides to load the same pokemon many times non-consecutively, the history queue will load those happily. These will come from cache after the first load, so will be served rapidly. This only add a single integer to the queue every time to the queue and the cache itself has no repeats, so if a user decides to do this, the resource cost is extremely minimal. 
 
-Last, on the right there is the history view, which lists all of the pokemon in the history queue. The current displayed pokemon is highlighted in blue. By clicking on any of these pokemon the viewer will snap back to that point in the queue. 
+Last, on the right there is the history view, which lists all of the pokemon in the history queue. The current displayed pokemon is highlighted in blue. By clicking on any of these pokemon the viewer will snap back to that point in the queue. Note that by adding a new pokemon from the pokedex search the pokemon will be added from either the cache, or the API, placed at the top of the queue and the index will be pointed there, i.e. history surfing is overriden by a new addition. 
 
 ## Business Requirements
 - [x] Use the Pokemon API to make API requests for data https://pokeapi.co/docs/v2. _Both REST and GraphQL endpoints are used_.
@@ -46,7 +46,7 @@ Last, on the right there is the history view, which lists all of the pokemon in 
 ## Bonus Points
 - [ ] Able to see details about abilities, moves, species, sprites, and types upon searching. _Spent a large amount of time wrestling Jest configuration to the ground, while it is tempting and easy at this stage, have not implemented this_ 
 - [ ] Able to see other evolutions of Pokemon and be able to navigate to specific Pokemon in the evolution chain. _Same as above_
-- [x] Sleak and intuitive style that resembles a Pokedex. _Confession: I have *no* idea what a Pokedex looks like, but I think the functionality implemented is quite intuitive_. 
+- [x] Sleak and intuitive style that resembles a Pokedex. _Confession: I have **no** idea what a Pokedex looks like, but I think the functionality implemented is quite intuitive. Used color palatte directly from Pokemon site where possible._ 
 - [x] Automated test to ensure the business logic is correct. _These are included, but could have more_
 
 TODO:
@@ -57,9 +57,10 @@ TODO:
 5. Use a more modern package manager than npm, in this case it was a deliberate choice as the presese of npm on a testing machine is almost ubiqutous. 
 6. Need to implement a factory system for all mocks inside the tests. 
 
-
 To deploy into a concurrent environment:
 1. File/Folder organization would have to be standardized. This folder setup works as it is a very small app.
 2. Error catching needs to be wired into appropriate logging API so problems can be detected centrally. 
 3. An error boundry around this feature might be appropriate. 
 4. Some End to End tests should be implemented.
+5. Folding all the styling into the centralized "Style Language" and standardized styled components library would be needed. 
+6. The "cache" used here is pretty trivial, with a single instance referenced at the top of the App (main.tsx). Even without this, as it is a simple single page app, I never had any problems with the cache being dereferenced and garbage collected. This would need to be folded into the proper cache solution used in a bigger environment. The reason not to use redux as the cache was down to a couple of things: First, redux rebuilds all state as a new state object on each change, while a cache is supposed to simply remember what was. This could certainly be made to work, but as both the number of cached pokemon and the business requirements of how much information is queried and stored grows the size of the cached objects copied to each new iteration gets big and performance could be an issue. Second, this is really a quickie stand in for what would be a system cache solution, so is a bit of a fully functional handwave to something larger. 
