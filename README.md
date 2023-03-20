@@ -44,7 +44,7 @@ Last, on the right there is the history view, which lists all of the pokemon in 
 - [x] Has a README. _This Document_
 
 ## Bonus Points
-- [ ] Able to see details about abilities, moves, species, sprites, and types upon searching. _Spent a large amount of time wrestling Jest configuration to the ground, while it is tempting and easy at this stage, have not implemented this. 
+- [ ] Able to see details about abilities, moves, species, sprites, and types upon searching. _Spent a large amount of time wrestling Jest configuration to the ground, while it is tempting and easy at this stage, have not implemented this_ 
 - [ ] Able to see other evolutions of Pokemon and be able to navigate to specific Pokemon in the evolution chain. _Same as above_
 - [x] Sleak and intuitive style that resembles a Pokedex. _Confession: I have *no* idea what a Pokedex looks like, but I think the functionality implemented is quite intuitive_. 
 - [x] Automated test to ensure the business logic is correct. _These are included, but could have more_
@@ -55,6 +55,7 @@ TODO:
 3. I didn't find any collected open source images of all the Pokemon, but having these woudl *greatly* enhance the UX
 4. I didn't take the time to grab and use svg icons. This would improve the UI
 5. Use a more modern package manager than npm, in this case it was a deliberate choice as the presese of npm on a testing machine is almost ubiqutous. 
+6. Need to implement a factory system for all mocks inside the tests. 
 
 
 To deploy into a concurrent environment:
